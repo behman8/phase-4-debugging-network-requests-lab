@@ -62,12 +62,12 @@ developing your own process.
 
 - Add a new toy when the toy form is submitted
 
-  - How I debugged:
+  - How I debugged: I opened up my console and then submitted a new toy to be added. The error I got in the console was a 500 (Internal Server Error). As I have learned if there is a 500 status code there is an error on the server. So I looked in the server logs. It gave a NameError (uninitialized constant ToysController::Toys). It also gave me where to find the uninitialized error. I found in the code that it was saying Toys.create instead of Toy.create. After changing that I submitted the toy again and it worked. 
 
 - Update the number of likes for a toy
 
-  - How I debugged:
+  - How I debugged: With the console open I clicked like on a toy and got a Uncaught (in promise) SyntaxError: Unexpected end of JSON input at ToyForm.js:21. It expects the server to return a string of JSON-formatted data, but you get this error when it is not returning any content. So I know I need to return JSON data in the response from the update controller action. When I went to the update controller action I noticed that it was not rendering json at the end. I added that to the action and went to like a toy and it increased a like for it.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
-  - How I debugged:
+  - How I debugged: I clicked the donate to goodwill button with the console open. It gave a 404 (not found) error. I then checked the network tab to get more info about it. Noticed it was a ActionController::RoutingError (No route matches [DELETE] "/toys/7"). So I went to check my routes and found where the problem was. There was no destroy action defined as a route. So I added it and clicked the donate to goodwill button again and it deleted the toy from the database.
